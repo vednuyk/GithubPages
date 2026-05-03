@@ -227,7 +227,7 @@ const IntroduceSection = ({ setActiveTab }: { setActiveTab: (tab: Tab) => void }
     >
       <div className="flex flex-col xl:flex-row gap-12 xl:gap-32 items-start justify-between">
         {/* Main Content Area */}
-        <div className="flex-1 w-full max-w-3xl">
+        <div className="flex-1 w-full max-w-3xl xl:pl-8">
           <header className="mb-20">
             <div className="flex items-center gap-2 text-slate-400 mb-6 text-xs uppercase tracking-widest font-bold">
               <div className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.5)]" /> Introduce
