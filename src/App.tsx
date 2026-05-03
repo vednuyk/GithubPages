@@ -107,7 +107,7 @@ const TimelineItemComponent = ({ item, onImageClick }: { item: TimelineItem, onI
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
-    className={`relative mb-10 flex w-full ${item.side === 'right' ? 'justify-end' : 'justify-start'}`}
+    className={`relative mb-10 flex w-full ${item.side === 'right' ? 'justify-end pl-24' : 'justify-start'}`}
   >
     <div className={`max-w-sm w-full flex flex-col ${item.side === 'right' ? 'items-end text-right' : 'items-start text-left'}`}>
       <div className="relative mb-2">
@@ -157,17 +157,17 @@ const GithubPanel = () => (
         <div className="w-1 h-4 bg-purple-500 rounded-full" /> My Skills & Stats
       </h3>
       <div className="space-y-4">
-        {/* GitHub Stats Cards with Dark Theme to match User's Screenshot */}
-        <div className="rounded-2xl border border-slate-100 bg-slate-900 p-3 shadow-sm overflow-hidden">
+        {/* GitHub Stats Cards - Using most stable theme settings */}
+        <div className="rounded-2xl border border-slate-100 bg-white p-3 shadow-sm overflow-hidden">
           <img 
-            src="https://github-readme-stats.vercel.app/api/top-langs/?username=vednuyk&layout=compact&theme=dark&hide_border=true&title_color=a855f7&text_color=ffffff&langs_count=6" 
+            src="https://github-readme-stats.vercel.app/api/top-langs/?username=vednuyk&layout=compact&langs_count=6&theme=default&hide_border=true&title_color=a855f7&text_color=475569" 
             alt="Top Languages" 
             className="w-full h-auto"
           />
         </div>
-        <div className="rounded-2xl border border-slate-100 bg-slate-900 p-3 shadow-sm overflow-hidden">
+        <div className="rounded-2xl border border-slate-100 bg-white p-3 shadow-sm overflow-hidden">
           <img 
-            src="https://github-readme-stats.vercel.app/api?username=vednuyk&show_icons=true&theme=dark&hide_border=true&title_color=a855f7&text_color=ffffff&icon_color=a855f7" 
+            src="https://github-readme-stats.vercel.app/api?username=vednuyk&show_icons=true&theme=default&hide_border=true&title_color=a855f7&text_color=475569&icon_color=a855f7" 
             alt="GitHub Stats" 
             className="w-full h-auto"
           />
