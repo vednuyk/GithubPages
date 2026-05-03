@@ -103,32 +103,36 @@ const Sidebar = ({ activeTab, setActiveTab }: { activeTab: Tab, setActiveTab: (t
 
 const TimelineItemComponent = ({ item }: { item: TimelineItem }) => (
   <motion.div 
-    initial={{ opacity: 0, x: -20 }}
-    whileInView={{ opacity: 1, x: 0 }}
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
-    className={`relative mb-16 flex flex-col items-start`}
+    className={`relative mb-20 flex w-full ${item.side === 'right' ? 'justify-end' : 'justify-start'}`}
   >
-    <div className="max-w-2xl w-full">
-      <div className="inline-block mb-2">
-        <h3 className="text-xl font-bold text-slate-900">{item.title}</h3>
-        <div className="mt-2 h-0.5 bg-slate-300 relative w-full">
-          <div className="absolute top-1/2 -translate-y-1/2 left-0 w-3 h-3 rounded-full bg-slate-600" />
+    <div className={`max-w-xl w-full flex flex-col ${item.side === 'right' ? 'items-end text-right' : 'items-start text-left'}`}>
+      <div className="relative mb-2">
+        <h3 className="text-xl font-bold text-slate-900 px-1">{item.title}</h3>
+        <div className={`mt-2 h-0.5 bg-slate-300 relative w-full`}>
+          <div className={`absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-slate-600 ${
+            item.side === 'right' ? '-right-4' : '-left-4'
+          }`} />
         </div>
       </div>
       
-      <p className="text-slate-500 font-medium mb-4 mt-2">{item.date}</p>
+      <p className="text-slate-500 font-medium mb-4 mt-2 px-1">{item.date}</p>
       
       {item.image && (
-        <div className="w-full max-w-lg h-48 bg-slate-100 rounded-3xl overflow-hidden mb-4 border border-slate-200 flex items-center justify-center">
+        <div className="w-full max-w-md h-56 bg-slate-100 rounded-3xl overflow-hidden mb-4 border border-slate-200 flex items-center justify-center">
           <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
         </div>
       )}
 
-      {item.description && <p className="text-slate-600 leading-relaxed mb-4 max-w-lg">{item.description}</p>}
+      {item.description && <p className="text-slate-600 leading-relaxed mb-4 max-w-md px-1">{item.description}</p>}
       
       {item.link && (
-        <a href={item.link} className="inline-flex items-center gap-1 text-slate-400 hover:text-purple-600 transition-colors text-sm font-medium">
-          View Project <ExternalLink className="w-3 h-3" />
+        <a href={item.link} className="inline-flex items-center gap-1 text-slate-400 hover:text-purple-600 transition-colors text-sm font-medium px-1">
+          {item.side === 'right' && <ExternalLink className="w-3 h-3" />}
+          View Project 
+          {item.side === 'left' && <ExternalLink className="w-3 h-3" />}
         </a>
       )}
     </div>
@@ -139,31 +143,36 @@ const IntroduceSection = () => (
   <motion.div 
     initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
-    className="w-full py-12 px-6 lg:px-16"
+    className="w-full py-12 px-6 lg:pl-32 lg:pr-16"
   >
-    <header className="mb-20">
+    <header className="mb-24">
       <div className="flex items-center gap-2 text-slate-400 mb-8 text-sm uppercase tracking-widest font-semibold">
         <div className="w-2 h-2 rounded-full bg-purple-500" /> Introduce
       </div>
-      <h2 className="text-3xl font-bold text-slate-900 mb-8">My Introduce</h2>
-      <p className="text-slate-500 leading-relaxed text-lg max-w-2xl">
-        안녕하세요! 새로운 기술을 배우고 적용하는 것을 즐기는 개발자 vednuyk입니다. 
+      <h2 className="text-3xl font-bold text-slate-900 mb-8 tracking-tight">My Introduce</h2>
+      <p className="text-slate-700 leading-relaxed text-lg max-w-2xl font-light">
+        안녕하세요! 새로운 기술을 배우고 적용하는 것을 즐기는 개발자 <span className="text-slate-900 font-semibold underline decoration-purple-500/30 underline-offset-4">vednuyk</span>입니다. 
         단순한 코드 작성을 넘어 사용자에게 가치를 전달하는 감각적인 UI/UX를 추구합니다.
       </p>
     </header>
 
-    <div className="w-full h-px bg-slate-200 mb-20 max-w-4xl" />
+    <div className="w-full h-px bg-slate-200 mb-24 max-w-5xl" />
 
-    <section>
-      <div className="flex items-center gap-4 mb-16">
+    <section className="max-w-5xl">
+      <div className="flex items-center gap-4 mb-20">
         <h2 className="text-3xl font-bold text-slate-900">My Journey</h2>
         <ChevronRight className="text-slate-300 w-6 h-6" />
       </div>
 
-      <div className="space-y-4">
-        {timelineData.map(item => (
-          <TimelineItemComponent key={item.id} item={item} />
-        ))}
+      <div className="relative px-4">
+        {/* Vertical Center Line for Journey */}
+        <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-slate-100 hidden lg:block" />
+        
+        <div className="space-y-4">
+          {timelineData.map(item => (
+            <TimelineItemComponent key={item.id} item={item} />
+          ))}
+        </div>
       </div>
     </section>
   </motion.div>
