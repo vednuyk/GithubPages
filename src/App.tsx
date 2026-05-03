@@ -39,6 +39,7 @@ const timelineData: TimelineItem[] = [
     title: "첫 웹 프로젝트 수상",
     date: "2021.05.15",
     description: "React를 활용한 첫 포트폴리오 사이트로 교내 경진대회에서 우수상을 수상했습니다.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=400&auto=format&fit=crop",
     link: "https://github.com",
     side: 'right'
   },
@@ -101,7 +102,7 @@ const Sidebar = ({ activeTab, setActiveTab }: { activeTab: Tab, setActiveTab: (t
   </aside>
 );
 
-const TimelineItemComponent = ({ item }: { item: TimelineItem }) => (
+const TimelineItemComponent = ({ item, onImageClick }: { item: TimelineItem, onImageClick: (item: TimelineItem) => void }) => (
   <motion.div 
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -113,7 +114,7 @@ const TimelineItemComponent = ({ item }: { item: TimelineItem }) => (
         <h3 className="text-xl font-bold text-slate-900 px-1">{item.title}</h3>
         <div className={`mt-2 h-0.5 bg-slate-300 relative w-full`}>
           <div className={`absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-slate-600 ${
-            item.side === 'right' ? '-right-4' : '-left-4'
+            item.side === 'right' ? '-right-1.5' : '-left-1.5'
           }`} />
         </div>
       </div>
@@ -121,15 +122,25 @@ const TimelineItemComponent = ({ item }: { item: TimelineItem }) => (
       <p className="text-slate-500 font-medium mb-4 mt-2 px-1">{item.date}</p>
       
       {item.image && (
-        <div className="w-full max-w-md h-56 bg-slate-100 rounded-3xl overflow-hidden mb-4 border border-slate-200 flex items-center justify-center">
-          <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
-        </div>
+        <motion.div 
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={() => onImageClick(item)}
+          className="w-full max-w-md h-56 bg-slate-100 rounded-3xl overflow-hidden mb-4 border border-slate-200 flex items-center justify-center cursor-pointer group relative shadow-sm hover:shadow-xl transition-all"
+        >
+          <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/20 transition-colors flex items-center justify-center">
+            <div className="p-3 bg-white/90 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300">
+              <ExternalLink className="text-slate-900 w-6 h-6" />
+            </div>
+          </div>
+        </motion.div>
       )}
 
       {item.description && <p className="text-slate-600 leading-relaxed mb-4 max-w-md px-1">{item.description}</p>}
       
       {item.link && (
-        <a href={item.link} className="inline-flex items-center gap-1 text-slate-400 hover:text-purple-600 transition-colors text-sm font-medium px-1">
+        <a href={item.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-slate-400 hover:text-purple-600 transition-colors text-sm font-medium px-1">
           {item.side === 'right' && <ExternalLink className="w-3 h-3" />}
           View Project 
           {item.side === 'left' && <ExternalLink className="w-3 h-3" />}
@@ -139,44 +150,57 @@ const TimelineItemComponent = ({ item }: { item: TimelineItem }) => (
   </motion.div>
 );
 
-const IntroduceSection = () => (
-  <motion.div 
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    className="w-full py-12 px-6 lg:pl-32 lg:pr-16"
-  >
-    <header className="mb-24">
-      <div className="flex items-center gap-2 text-slate-400 mb-8 text-sm uppercase tracking-widest font-semibold">
-        <div className="w-2 h-2 rounded-full bg-purple-500" /> Introduce
-      </div>
-      <h2 className="text-3xl font-bold text-slate-900 mb-8 tracking-tight">My Introduce</h2>
-      <p className="text-slate-700 leading-relaxed text-lg max-w-2xl font-light">
-        안녕하세요! 새로운 기술을 배우고 적용하는 것을 즐기는 개발자 <span className="text-slate-900 font-semibold underline decoration-purple-500/30 underline-offset-4">vednuyk</span>입니다. 
-        단순한 코드 작성을 넘어 사용자에게 가치를 전달하는 감각적인 UI/UX를 추구합니다.
-      </p>
-    </header>
+const IntroduceSection = ({ setActiveTab }: { setActiveTab: (tab: Tab) => void }) => {
+  const handleImageClick = (item: TimelineItem) => {
+    if (item.id === 2) {
+      setActiveTab('Project');
+    } else if (item.link) {
+      window.open(item.link, '_blank');
+    }
+  };
 
-    <div className="w-full h-px bg-slate-200 mb-24 max-w-5xl" />
-
-    <section className="max-w-5xl">
-      <div className="flex items-center gap-4 mb-20">
-        <h2 className="text-3xl font-bold text-slate-900">My Journey</h2>
-        <ChevronRight className="text-slate-300 w-6 h-6" />
-      </div>
-
-      <div className="relative px-4">
-        {/* Vertical Center Line for Journey */}
-        <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-slate-100 hidden lg:block" />
-        
-        <div className="space-y-4">
-          {timelineData.map(item => (
-            <TimelineItemComponent key={item.id} item={item} />
-          ))}
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="w-full py-12 px-6 lg:pl-32 lg:pr-16"
+    >
+      <header className="mb-24">
+        <div className="flex items-center gap-2 text-slate-400 mb-8 text-sm uppercase tracking-widest font-semibold">
+          <div className="w-2 h-2 rounded-full bg-purple-500" /> Introduce
         </div>
-      </div>
-    </section>
-  </motion.div>
-);
+        <h2 className="text-3xl font-bold text-slate-900 mb-8 tracking-tight">My Introduce</h2>
+        <p className="text-slate-700 leading-relaxed text-lg max-w-2xl font-light">
+          안녕하세요! 새로운 기술을 배우고 적용하는 것을 즐기는 개발자 <span className="text-slate-900 font-semibold underline decoration-purple-500/30 underline-offset-4">vednuyk</span>입니다. 
+          단순한 코드 작성을 넘어 사용자에게 가치를 전달하는 감각적인 UI/UX를 추구합니다.
+        </p>
+      </header>
+
+      <div className="w-full h-px bg-slate-200 mb-24 max-w-5xl" />
+
+      <section className="max-w-5xl">
+        <div className="flex items-center gap-4 mb-20">
+          <h2 className="text-3xl font-bold text-slate-900">My Journey</h2>
+          <ChevronRight className="text-slate-300 w-6 h-6" />
+        </div>
+
+        <div className="relative px-4">
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-slate-100 hidden lg:block" />
+          
+          <div className="space-y-4">
+            {timelineData.map(item => (
+              <TimelineItemComponent 
+                key={item.id} 
+                item={item} 
+                onImageClick={handleImageClick}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    </motion.div>
+  );
+};
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<Tab>('Introduce');
@@ -197,7 +221,7 @@ const App: React.FC = () => {
 
           <AnimatePresence mode="wait">
             {activeTab === 'Introduce' && (
-              <IntroduceSection key="introduce" />
+              <IntroduceSection key="introduce" setActiveTab={setActiveTab} />
             )}
             {activeTab === 'Project' && (
               <motion.div 
