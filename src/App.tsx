@@ -4,7 +4,7 @@ import {
   Home, 
   FolderRoot, 
   FileText, 
-  Github, 
+  Github as GitHubIcon, 
   Mail, 
   ExternalLink,
   ChevronRight,
@@ -93,7 +93,7 @@ const Sidebar = ({ activeTab, setActiveTab }: { activeTab: Tab, setActiveTab: (t
 
     <div className="pt-8 mt-auto border-t border-slate-900 flex flex-col gap-6">
       <div className="flex items-center gap-4 px-2">
-        <a href="https://github.com/vednuyk" className="hover:text-purple-500 transition-colors"><Github className="w-5 h-5" /></a>
+        <a href="https://github.com/vednuyk" className="hover:text-purple-500 transition-colors"><GitHubIcon className="w-5 h-5" /></a>
         <a href="mailto:example@email.com" className="hover:text-purple-500 transition-colors"><Mail className="w-5 h-5" /></a>
       </div>
       <p className="text-xs text-slate-600">© 2026 vednuyk. All rights reserved.</p>
