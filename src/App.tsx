@@ -107,40 +107,40 @@ const TimelineItemComponent = ({ item, onImageClick }: { item: TimelineItem, onI
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
-    className={`relative mb-20 flex w-full ${item.side === 'right' ? 'justify-end' : 'justify-start'}`}
+    className={`relative mb-10 flex w-full ${item.side === 'right' ? 'justify-end' : 'justify-start'}`}
   >
-    <div className={`max-w-xl w-full flex flex-col ${item.side === 'right' ? 'items-end text-right' : 'items-start text-left'}`}>
+    <div className={`max-w-sm w-full flex flex-col ${item.side === 'right' ? 'items-end text-right' : 'items-start text-left'}`}>
       <div className="relative mb-2">
-        <h3 className="text-xl font-bold text-slate-900 px-1">{item.title}</h3>
-        <div className={`mt-2 h-0.5 bg-slate-300 relative w-full`}>
-          <div className={`absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-slate-600 ${
+        <h3 className="text-lg font-bold text-slate-900 px-1 leading-tight">{item.title}</h3>
+        <div className={`mt-1.5 h-0.5 bg-slate-300 relative w-full`}>
+          <div className={`absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-slate-600 ${
             item.side === 'right' ? '-right-1.5' : '-left-1.5'
           }`} />
         </div>
       </div>
       
-      <p className="text-slate-500 font-medium mb-4 mt-2 px-1">{item.date}</p>
+      <p className="text-slate-400 font-medium mb-3 mt-1 text-sm px-1">{item.date}</p>
       
       {item.image && (
         <motion.div 
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => onImageClick(item)}
-          className="w-full max-w-md h-56 bg-slate-100 rounded-3xl overflow-hidden mb-4 border border-slate-200 flex items-center justify-center cursor-pointer group relative shadow-sm hover:shadow-xl transition-all"
+          className="w-full h-40 bg-slate-100 rounded-2xl overflow-hidden mb-3 border border-slate-200 flex items-center justify-center cursor-pointer group relative shadow-sm"
         >
-          <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
-          <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/20 transition-colors flex items-center justify-center">
-            <div className="p-3 bg-white/90 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300">
-              <ExternalLink className="text-slate-900 w-6 h-6" />
+          <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-85 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-colors flex items-center justify-center">
+            <div className="p-2 bg-white/90 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300">
+              <ExternalLink className="text-slate-900 w-4 h-4" />
             </div>
           </div>
         </motion.div>
       )}
 
-      {item.description && <p className="text-slate-600 leading-relaxed mb-4 max-w-md px-1">{item.description}</p>}
+      {item.description && <p className="text-slate-500 text-sm leading-relaxed mb-3 px-1">{item.description}</p>}
       
       {item.link && (
-        <a href={item.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-slate-400 hover:text-purple-600 transition-colors text-sm font-medium px-1">
+        <a href={item.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-slate-400 hover:text-purple-600 transition-colors text-xs font-medium px-1">
           {item.side === 'right' && <ExternalLink className="w-3 h-3" />}
           View Project 
           {item.side === 'left' && <ExternalLink className="w-3 h-3" />}
@@ -165,29 +165,27 @@ const IntroduceSection = ({ setActiveTab }: { setActiveTab: (tab: Tab) => void }
       animate={{ opacity: 1, y: 0 }}
       className="w-full py-12 px-6 lg:pl-32 lg:pr-16"
     >
-      <header className="mb-24">
-        <div className="flex items-center gap-2 text-slate-400 mb-8 text-sm uppercase tracking-widest font-semibold">
-          <div className="w-2 h-2 rounded-full bg-purple-500" /> Introduce
+      <header className="mb-20">
+        <div className="flex items-center gap-2 text-slate-400 mb-6 text-xs uppercase tracking-widest font-bold">
+          <div className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.5)]" /> Introduce
         </div>
-        <h2 className="text-3xl font-bold text-slate-900 mb-8 tracking-tight">My Introduce</h2>
-        <p className="text-slate-700 leading-relaxed text-lg max-w-2xl font-light">
+        <h2 className="text-3xl font-bold text-slate-900 mb-6 tracking-tight">My Introduce</h2>
+        <p className="text-slate-600 leading-relaxed text-lg max-w-2xl font-light">
           안녕하세요! 새로운 기술을 배우고 적용하는 것을 즐기는 개발자 <span className="text-slate-900 font-semibold underline decoration-purple-500/30 underline-offset-4">vednuyk</span>입니다. 
           단순한 코드 작성을 넘어 사용자에게 가치를 전달하는 감각적인 UI/UX를 추구합니다.
         </p>
       </header>
 
-      <div className="w-full h-px bg-slate-200 mb-24 max-w-5xl" />
+      <div className="w-full h-px bg-slate-100 mb-20 max-w-4xl" />
 
-      <section className="max-w-5xl">
-        <div className="flex items-center gap-4 mb-20">
-          <h2 className="text-3xl font-bold text-slate-900">My Journey</h2>
-          <ChevronRight className="text-slate-300 w-6 h-6" />
+      <section>
+        <div className="flex items-center gap-4 mb-16">
+          <h2 className="text-2xl font-bold text-slate-900">My Journey</h2>
+          <ChevronRight className="text-slate-300 w-5 h-5" />
         </div>
 
-        <div className="relative px-4">
-          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-slate-100 hidden lg:block" />
-          
-          <div className="space-y-4">
+        <div className="max-w-3xl relative">
+          <div className="space-y-2">
             {timelineData.map(item => (
               <TimelineItemComponent 
                 key={item.id} 
