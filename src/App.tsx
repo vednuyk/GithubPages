@@ -151,58 +151,57 @@ const TimelineItemComponent = ({ item, onImageClick }: { item: TimelineItem, onI
 );
 
 const GithubPanel = () => (
-  <div className="w-full lg:w-80 space-y-8 flex-shrink-0">
+  <div className="w-full xl:w-80 space-y-10 flex-shrink-0 lg:sticky lg:top-8">
     <section>
-      <h3 className="text-sm font-bold text-slate-900 mb-4 uppercase tracking-wider flex items-center gap-2">
-        <div className="w-1 h-4 bg-purple-500 rounded-full" /> My Stats
+      <h3 className="text-sm font-bold text-slate-900 mb-6 uppercase tracking-wider flex items-center gap-2">
+        <div className="w-1 h-4 bg-purple-500 rounded-full" /> My Skills & Stats
       </h3>
-      <div className="space-y-4">
-        {/* GitHub Stats Card */}
-        <div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-1 overflow-hidden">
+      <div className="space-y-6">
+        {/* GitHub Stats Cards with optimized sizing */}
+        <div className="rounded-2xl border border-slate-100 bg-white p-2 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
           <img 
-            src="https://github-readme-stats.vercel.app/api/top-langs/?username=vednuyk&layout=compact&theme=transparent&hide_border=true&title_color=0f172a&text_color=475569&langs_count=5" 
+            src="https://github-readme-stats.vercel.app/api/top-langs/?username=vednuyk&layout=compact&theme=transparent&hide_border=true&title_color=0f172a&text_color=475569&langs_count=6" 
             alt="Top Languages" 
-            className="w-full"
+            className="w-full h-auto min-h-[150px] object-contain"
           />
         </div>
-        <div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-1 overflow-hidden">
+        <div className="rounded-2xl border border-slate-100 bg-white p-2 shadow-sm hover:shadow-md transition-shadow overflow-hidden text-center">
           <img 
             src="https://github-readme-stats.vercel.app/api?username=vednuyk&show_icons=true&theme=transparent&hide_border=true&title_color=0f172a&text_color=475569&icon_color=a855f7" 
             alt="GitHub Stats" 
-            className="w-full"
+            className="w-full h-auto min-h-[160px] object-contain inline-block"
           />
         </div>
       </div>
     </section>
 
     <section>
-      <h3 className="text-sm font-bold text-slate-900 mb-4 uppercase tracking-wider flex items-center gap-2">
+      <h3 className="text-sm font-bold text-slate-900 mb-6 uppercase tracking-wider flex items-center gap-2">
         <div className="w-1 h-4 bg-purple-500 rounded-full" /> Recent Projects
       </h3>
-      <div className="space-y-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-4">
         {[
-          { name: 'GithubPages', desc: 'Emotional Portfolio Template', lang: 'TypeScript' },
-          { name: 'React-Animation-Lab', desc: 'Framer Motion Experiments', lang: 'JavaScript' },
-          { name: 'Modern-UI-Components', desc: 'Tailwind CSS UI Kit', lang: 'CSS' }
+          { name: 'MyCrazyPerformanceGame', desc: 'Performance optimized game project', lang: 'JavaScript' },
+          { name: 'GithubPages', desc: 'Sensational Emotional Portfolio', lang: 'TypeScript' }
         ].map((repo, idx) => (
           <motion.a
             key={idx}
             href={`https://github.com/vednuyk/${repo.name}`}
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ x: 4 }}
-            className="block p-4 rounded-2xl border border-slate-100 bg-white hover:border-purple-200 hover:shadow-md transition-all group"
+            whileHover={{ y: -4 }}
+            className="block p-5 rounded-2xl border border-slate-100 bg-white hover:border-purple-300 hover:shadow-lg transition-all group"
           >
-            <div className="flex items-center justify-between mb-1">
-              <span className="font-bold text-slate-900 group-hover:text-purple-600 transition-colors">{repo.name}</span>
-              <ExternalLink className="w-3 h-3 text-slate-300 group-hover:text-purple-400" />
+            <div className="flex items-center justify-between mb-2">
+              <span className="font-bold text-slate-900 group-hover:text-purple-600 transition-colors truncate pr-2">{repo.name}</span>
+              <ExternalLink className="w-3.5 h-3.5 text-slate-300 group-hover:text-purple-400 flex-shrink-0" />
             </div>
-            <p className="text-xs text-slate-500 mb-3 line-clamp-1">{repo.desc}</p>
+            <p className="text-xs text-slate-500 mb-4 line-clamp-2 leading-relaxed">{repo.desc}</p>
             <div className="flex items-center gap-2">
-              <div className={`w-2 h-2 rounded-full ${
+              <div className={`w-2.5 h-2.5 rounded-full shadow-sm ${
                 repo.lang === 'TypeScript' ? 'bg-blue-500' : repo.lang === 'JavaScript' ? 'bg-yellow-400' : 'bg-purple-400'
               }`} />
-              <span className="text-[10px] font-medium text-slate-400 uppercase tracking-tighter">{repo.lang}</span>
+              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{repo.lang}</span>
             </div>
           </motion.a>
         ))}
@@ -226,9 +225,9 @@ const IntroduceSection = ({ setActiveTab }: { setActiveTab: (tab: Tab) => void }
       animate={{ opacity: 1, y: 0 }}
       className="w-full py-12 px-6 lg:pl-20 lg:pr-12"
     >
-      <div className="flex flex-col xl:flex-row gap-16 items-start">
+      <div className="flex flex-col xl:flex-row gap-12 xl:gap-20 items-start">
         {/* Main Content Area */}
-        <div className="flex-1 w-full max-w-4xl">
+        <div className="flex-1 w-full xl:max-w-[calc(100%-22rem)]">
           <header className="mb-20">
             <div className="flex items-center gap-2 text-slate-400 mb-6 text-xs uppercase tracking-widest font-bold">
               <div className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.5)]" /> Introduce
