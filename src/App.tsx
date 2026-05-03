@@ -223,11 +223,11 @@ const IntroduceSection = ({ setActiveTab }: { setActiveTab: (tab: Tab) => void }
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="w-full py-12 px-6 lg:px-12 xl:px-20 mx-auto max-w-7xl"
+      className="w-full py-12 px-6 lg:px-12 xl:px-16 mx-auto max-w-[90rem]"
     >
-      <div className="flex flex-col xl:flex-row gap-12 xl:gap-16 items-start justify-center">
+      <div className="flex flex-col xl:flex-row gap-12 xl:gap-32 items-start justify-between">
         {/* Main Content Area */}
-        <div className="flex-1 w-full max-w-2xl">
+        <div className="flex-1 w-full max-w-3xl">
           <header className="mb-20">
             <div className="flex items-center gap-2 text-slate-400 mb-6 text-xs uppercase tracking-widest font-bold">
               <div className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.5)]" /> Introduce
