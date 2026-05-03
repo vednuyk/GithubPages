@@ -150,6 +150,67 @@ const TimelineItemComponent = ({ item, onImageClick }: { item: TimelineItem, onI
   </motion.div>
 );
 
+const GithubPanel = () => (
+  <div className="w-full lg:w-80 space-y-8 flex-shrink-0">
+    <section>
+      <h3 className="text-sm font-bold text-slate-900 mb-4 uppercase tracking-wider flex items-center gap-2">
+        <div className="w-1 h-4 bg-purple-500 rounded-full" /> My Stats
+      </h3>
+      <div className="space-y-4">
+        {/* GitHub Stats Card */}
+        <div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-1 overflow-hidden">
+          <img 
+            src="https://github-readme-stats.vercel.app/api/top-langs/?username=vednuyk&layout=compact&theme=transparent&hide_border=true&title_color=0f172a&text_color=475569&langs_count=5" 
+            alt="Top Languages" 
+            className="w-full"
+          />
+        </div>
+        <div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-1 overflow-hidden">
+          <img 
+            src="https://github-readme-stats.vercel.app/api?username=vednuyk&show_icons=true&theme=transparent&hide_border=true&title_color=0f172a&text_color=475569&icon_color=a855f7" 
+            alt="GitHub Stats" 
+            className="w-full"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3 className="text-sm font-bold text-slate-900 mb-4 uppercase tracking-wider flex items-center gap-2">
+        <div className="w-1 h-4 bg-purple-500 rounded-full" /> Recent Projects
+      </h3>
+      <div className="space-y-3">
+        {[
+          { name: 'GithubPages', desc: 'Emotional Portfolio Template', lang: 'TypeScript' },
+          { name: 'React-Animation-Lab', desc: 'Framer Motion Experiments', lang: 'JavaScript' },
+          { name: 'Modern-UI-Components', desc: 'Tailwind CSS UI Kit', lang: 'CSS' }
+        ].map((repo, idx) => (
+          <motion.a
+            key={idx}
+            href={`https://github.com/vednuyk/${repo.name}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ x: 4 }}
+            className="block p-4 rounded-2xl border border-slate-100 bg-white hover:border-purple-200 hover:shadow-md transition-all group"
+          >
+            <div className="flex items-center justify-between mb-1">
+              <span className="font-bold text-slate-900 group-hover:text-purple-600 transition-colors">{repo.name}</span>
+              <ExternalLink className="w-3 h-3 text-slate-300 group-hover:text-purple-400" />
+            </div>
+            <p className="text-xs text-slate-500 mb-3 line-clamp-1">{repo.desc}</p>
+            <div className="flex items-center gap-2">
+              <div className={`w-2 h-2 rounded-full ${
+                repo.lang === 'TypeScript' ? 'bg-blue-500' : repo.lang === 'JavaScript' ? 'bg-yellow-400' : 'bg-purple-400'
+              }`} />
+              <span className="text-[10px] font-medium text-slate-400 uppercase tracking-tighter">{repo.lang}</span>
+            </div>
+          </motion.a>
+        ))}
+      </div>
+    </section>
+  </div>
+);
+
 const IntroduceSection = ({ setActiveTab }: { setActiveTab: (tab: Tab) => void }) => {
   const handleImageClick = (item: TimelineItem) => {
     if (item.id === 2) {
@@ -163,39 +224,47 @@ const IntroduceSection = ({ setActiveTab }: { setActiveTab: (tab: Tab) => void }
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="w-full py-12 px-6 lg:pl-32 lg:pr-16"
+      className="w-full py-12 px-6 lg:pl-20 lg:pr-12"
     >
-      <header className="mb-20">
-        <div className="flex items-center gap-2 text-slate-400 mb-6 text-xs uppercase tracking-widest font-bold">
-          <div className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.5)]" /> Introduce
-        </div>
-        <h2 className="text-3xl font-bold text-slate-900 mb-6 tracking-tight">My Introduce</h2>
-        <p className="text-slate-600 leading-relaxed text-lg max-w-2xl font-light">
-          안녕하세요! 새로운 기술을 배우고 적용하는 것을 즐기는 개발자 <span className="text-slate-900 font-semibold underline decoration-purple-500/30 underline-offset-4">vednuyk</span>입니다. 
-          단순한 코드 작성을 넘어 사용자에게 가치를 전달하는 감각적인 UI/UX를 추구합니다.
-        </p>
-      </header>
+      <div className="flex flex-col xl:flex-row gap-16 items-start">
+        {/* Main Content Area */}
+        <div className="flex-1 w-full max-w-4xl">
+          <header className="mb-20">
+            <div className="flex items-center gap-2 text-slate-400 mb-6 text-xs uppercase tracking-widest font-bold">
+              <div className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.5)]" /> Introduce
+            </div>
+            <h2 className="text-3xl font-bold text-slate-900 mb-6 tracking-tight">My Introduce</h2>
+            <p className="text-slate-600 leading-relaxed text-lg max-w-2xl font-light">
+              안녕하세요! 새로운 기술을 배우고 적용하는 것을 즐기는 개발자 <span className="text-slate-900 font-semibold underline decoration-purple-500/30 underline-offset-4">vednuyk</span>입니다. 
+              단순한 코드 작성을 넘어 사용자에게 가치를 전달하는 감각적인 UI/UX를 추구합니다.
+            </p>
+          </header>
 
-      <div className="w-full h-px bg-slate-100 mb-20 max-w-4xl" />
+          <div className="w-full h-px bg-slate-100 mb-20" />
 
-      <section>
-        <div className="flex items-center gap-4 mb-16">
-          <h2 className="text-2xl font-bold text-slate-900">My Journey</h2>
-          <ChevronRight className="text-slate-300 w-5 h-5" />
+          <section>
+            <div className="flex items-center gap-4 mb-12">
+              <h2 className="text-2xl font-bold text-slate-900">My Journey</h2>
+              <ChevronRight className="text-slate-300 w-5 h-5" />
+            </div>
+
+            <div className="relative">
+              <div className="space-y-2">
+                {timelineData.map(item => (
+                  <TimelineItemComponent 
+                    key={item.id} 
+                    item={item} 
+                    onImageClick={handleImageClick}
+                  />
+                ))}
+              </div>
+            </div>
+          </section>
         </div>
 
-        <div className="max-w-3xl relative">
-          <div className="space-y-2">
-            {timelineData.map(item => (
-              <TimelineItemComponent 
-                key={item.id} 
-                item={item} 
-                onImageClick={handleImageClick}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+        {/* Right Sidebar Area (GitHub Stats) */}
+        <GithubPanel />
+      </div>
     </motion.div>
   );
 };
