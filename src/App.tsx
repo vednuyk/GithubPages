@@ -247,7 +247,7 @@ const IntroduceSection = ({ setActiveTab }: { setActiveTab: (tab: Tab) => void }
               <ChevronRight className="text-slate-300 w-5 h-5" />
             </div>
 
-            <div className="relative">
+            <div className="relative max-w-4xl">
               <div className="space-y-2">
                 {timelineData.map(item => (
                   <TimelineItemComponent 
