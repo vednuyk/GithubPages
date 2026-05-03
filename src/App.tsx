@@ -103,29 +103,28 @@ const Sidebar = ({ activeTab, setActiveTab }: { activeTab: Tab, setActiveTab: (t
 
 const TimelineItemComponent = ({ item }: { item: TimelineItem }) => (
   <motion.div 
-    initial={{ opacity: 0, x: item.side === 'left' ? -20 : 20 }}
+    initial={{ opacity: 0, x: -20 }}
     whileInView={{ opacity: 1, x: 0 }}
     viewport={{ once: true }}
-    className={`relative mb-16 flex flex-col ${item.side === 'right' ? 'items-end' : 'items-start'}`}
+    className={`relative mb-16 flex flex-col items-start`}
   >
-    <div className={`max-w-xl w-full`}>
-      <h3 className="text-xl font-bold text-slate-900 mb-2 underline decoration-slate-300 underline-offset-8 decoration-2">{item.title}</h3>
-      
-      <div className="flex items-center gap-4 mb-4">
-        <div className="flex-1 h-0.5 bg-slate-200 relative">
-          <div className={`absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-slate-600 ${item.side === 'right' ? 'right-0' : 'left-0'}`} />
+    <div className="max-w-2xl w-full">
+      <div className="inline-block mb-2">
+        <h3 className="text-xl font-bold text-slate-900">{item.title}</h3>
+        <div className="mt-2 h-0.5 bg-slate-300 relative w-full">
+          <div className="absolute top-1/2 -translate-y-1/2 left-0 w-3 h-3 rounded-full bg-slate-600" />
         </div>
       </div>
       
-      <p className="text-slate-500 font-medium mb-4">{item.date}</p>
+      <p className="text-slate-500 font-medium mb-4 mt-2">{item.date}</p>
       
       {item.image && (
-        <div className="w-full h-48 bg-slate-100 rounded-3xl overflow-hidden mb-4 border border-slate-200 flex items-center justify-center">
+        <div className="w-full max-w-lg h-48 bg-slate-100 rounded-3xl overflow-hidden mb-4 border border-slate-200 flex items-center justify-center">
           <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
         </div>
       )}
 
-      {item.description && <p className="text-slate-600 leading-relaxed mb-4">{item.description}</p>}
+      {item.description && <p className="text-slate-600 leading-relaxed mb-4 max-w-lg">{item.description}</p>}
       
       {item.link && (
         <a href={item.link} className="inline-flex items-center gap-1 text-slate-400 hover:text-purple-600 transition-colors text-sm font-medium">
@@ -140,7 +139,7 @@ const IntroduceSection = () => (
   <motion.div 
     initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
-    className="max-w-4xl mx-auto py-12 px-6 lg:px-12"
+    className="w-full py-12 px-6 lg:px-16"
   >
     <header className="mb-20">
       <div className="flex items-center gap-2 text-slate-400 mb-8 text-sm uppercase tracking-widest font-semibold">
@@ -153,10 +152,10 @@ const IntroduceSection = () => (
       </p>
     </header>
 
-    <div className="w-full h-px bg-slate-200 mb-20" />
+    <div className="w-full h-px bg-slate-200 mb-20 max-w-4xl" />
 
     <section>
-      <div className="flex items-center justify-between mb-16">
+      <div className="flex items-center gap-4 mb-16">
         <h2 className="text-3xl font-bold text-slate-900">My Journey</h2>
         <ChevronRight className="text-slate-300 w-6 h-6" />
       </div>
@@ -197,7 +196,7 @@ const App: React.FC = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="flex-1 flex items-center justify-center text-slate-400 italic"
+                className="flex-1 p-16 text-slate-400 italic"
               >
                 Project content coming soon...
               </motion.div>
@@ -208,21 +207,12 @@ const App: React.FC = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="flex-1 flex items-center justify-center text-slate-400 italic"
+                className="flex-1 p-16 text-slate-400 italic"
               >
                 Post content coming soon...
               </motion.div>
             )}
           </AnimatePresence>
-
-          {/* Scrollbar Decoration (Decorational) */}
-          <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 w-1.5 h-64 bg-slate-100 rounded-full overflow-hidden">
-            <motion.div 
-              className="w-full bg-slate-300 rounded-full h-1/3"
-              animate={{ y: [0, 100, 0] }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            />
-          </div>
         </motion.div>
       </main>
     </div>
