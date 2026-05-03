@@ -151,25 +151,25 @@ const TimelineItemComponent = ({ item, onImageClick }: { item: TimelineItem, onI
 );
 
 const GithubPanel = () => (
-  <div className="w-full xl:w-80 space-y-10 flex-shrink-0 lg:sticky lg:top-8">
+  <div className="w-full xl:w-80 space-y-10 flex-shrink-0 lg:sticky lg:top-8 xl:border-l xl:border-slate-100 xl:pl-12">
     <section>
       <h3 className="text-sm font-bold text-slate-900 mb-6 uppercase tracking-wider flex items-center gap-2">
         <div className="w-1 h-4 bg-purple-500 rounded-full" /> My Skills & Stats
       </h3>
-      <div className="space-y-6">
-        {/* GitHub Stats Cards with optimized sizing */}
-        <div className="rounded-2xl border border-slate-100 bg-white p-2 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+      <div className="space-y-4">
+        {/* GitHub Stats Cards with Dark Theme to match User's Screenshot */}
+        <div className="rounded-2xl border border-slate-100 bg-slate-900 p-3 shadow-sm overflow-hidden">
           <img 
-            src="https://github-readme-stats.vercel.app/api/top-langs/?username=vednuyk&layout=compact&theme=transparent&hide_border=true&title_color=0f172a&text_color=475569&langs_count=6" 
+            src="https://github-readme-stats.vercel.app/api/top-langs/?username=vednuyk&layout=compact&theme=dark&hide_border=true&title_color=a855f7&text_color=ffffff&langs_count=6" 
             alt="Top Languages" 
-            className="w-full h-auto min-h-[150px] object-contain"
+            className="w-full h-auto"
           />
         </div>
-        <div className="rounded-2xl border border-slate-100 bg-white p-2 shadow-sm hover:shadow-md transition-shadow overflow-hidden text-center">
+        <div className="rounded-2xl border border-slate-100 bg-slate-900 p-3 shadow-sm overflow-hidden">
           <img 
-            src="https://github-readme-stats.vercel.app/api?username=vednuyk&show_icons=true&theme=transparent&hide_border=true&title_color=0f172a&text_color=475569&icon_color=a855f7" 
+            src="https://github-readme-stats.vercel.app/api?username=vednuyk&show_icons=true&theme=dark&hide_border=true&title_color=a855f7&text_color=ffffff&icon_color=a855f7" 
             alt="GitHub Stats" 
-            className="w-full h-auto min-h-[160px] object-contain inline-block"
+            className="w-full h-auto"
           />
         </div>
       </div>
@@ -181,7 +181,7 @@ const GithubPanel = () => (
       </h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-4">
         {[
-          { name: 'MyCrazyPerformanceGame', desc: 'Performance optimized game project', lang: 'JavaScript' },
+          { name: 'MyCrazyPerformanceGame', desc: 'Performance optimized game project written in C', lang: 'C/C++' },
           { name: 'GithubPages', desc: 'Sensational Emotional Portfolio', lang: 'TypeScript' }
         ].map((repo, idx) => (
           <motion.a
@@ -199,7 +199,7 @@ const GithubPanel = () => (
             <p className="text-xs text-slate-500 mb-4 line-clamp-2 leading-relaxed">{repo.desc}</p>
             <div className="flex items-center gap-2">
               <div className={`w-2.5 h-2.5 rounded-full shadow-sm ${
-                repo.lang === 'TypeScript' ? 'bg-blue-500' : repo.lang === 'JavaScript' ? 'bg-yellow-400' : 'bg-purple-400'
+                repo.lang === 'TypeScript' ? 'bg-blue-500' : repo.lang === 'C/C++' ? 'bg-slate-500' : 'bg-purple-400'
               }`} />
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{repo.lang}</span>
             </div>
@@ -223,11 +223,11 @@ const IntroduceSection = ({ setActiveTab }: { setActiveTab: (tab: Tab) => void }
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="w-full py-12 px-6 lg:pl-20 lg:pr-12"
+      className="w-full py-12 px-6 lg:pl-16 lg:pr-12"
     >
-      <div className="flex flex-col xl:flex-row gap-12 xl:gap-20 items-start">
+      <div className="flex flex-col xl:flex-row gap-12 xl:gap-12 items-start">
         {/* Main Content Area */}
-        <div className="flex-1 w-full xl:max-w-[calc(100%-22rem)]">
+        <div className="flex-1 w-full xl:max-w-2xl">
           <header className="mb-20">
             <div className="flex items-center gap-2 text-slate-400 mb-6 text-xs uppercase tracking-widest font-bold">
               <div className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.5)]" /> Introduce
