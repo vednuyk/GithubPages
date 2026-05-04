@@ -7,8 +7,12 @@ import {
   Globe, 
   Mail, 
   ExternalLink,
-  Menu
+  Menu,
+  Star,
+  Users,
+  Book
 } from 'lucide-react';
+import githubStats from './data/github-stats.json';
 
 // --- Types ---
 type Tab = 'Introduce' | 'Project' | 'Post';
@@ -149,47 +153,56 @@ const TimelineItemComponent = ({ item, onImageClick }: { item: TimelineItem, onI
 );
 
 const GithubPanel = () => {
-  const [statsError, setStatsError] = useState(false);
-  const [langsError, setLangsError] = useState(false);
-
   return (
-    <div className="w-full xl:w-80 space-y-10 flex-shrink-0 lg:sticky lg:top-8 xl:border-l xl:border-slate-100 xl:pl-12">
+    <div className="w-full xl:w-80 space-y-8 flex-shrink-0 lg:sticky lg:top-8 xl:border-l xl:border-slate-100 xl:pl-12">
       <section>
         <h3 className="text-sm font-bold text-slate-900 mb-6 uppercase tracking-wider flex items-center gap-2">
-          <div className="w-1 h-4 bg-purple-500 rounded-full" /> My Skills & Stats
+          <div className="w-1 h-4 bg-purple-500 rounded-full" /> Top Languages
         </h3>
-        <div className="space-y-4">
-          {/* GitHub Stats Cards */}
-          <div className="rounded-2xl border border-slate-100 bg-white p-3 shadow-sm overflow-hidden min-h-[150px] flex items-center justify-center">
-            {!langsError ? (
-              <img 
-                src="https://github-readme-stats.vercel.app/api/top-langs/?username=vednuyk&layout=compact&langs_count=6&theme=default&hide_border=true&title_color=a855f7&text_color=475569&cache_seconds=1800" 
-                alt="Top Languages" 
-                className="w-full h-auto"
-                onError={() => setLangsError(true)}
+        <div className="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm">
+          <div className="flex h-3 w-full rounded-full overflow-hidden mb-6 bg-slate-100">
+            {githubStats.languages.map((lang, idx) => (
+              <div 
+                key={idx}
+                style={{ width: `${lang.percent}%`, backgroundColor: lang.color }}
+                className="h-full transition-all duration-500"
               />
-            ) : (
-              <div className="text-center p-4">
-                <p className="text-xs text-slate-400 mb-2">언어 통계를 불러올 수 없습니다.</p>
-                <a href="https://github.com/vednuyk" target="_blank" rel="noopener noreferrer" className="text-[10px] text-purple-500 font-bold hover:underline">GitHub에서 보기</a>
-              </div>
-            )}
+            ))}
           </div>
-          <div className="rounded-2xl border border-slate-100 bg-white p-3 shadow-sm overflow-hidden min-h-[150px] flex items-center justify-center">
-            {!statsError ? (
-              <img 
-                src="https://github-readme-stats.vercel.app/api?username=vednuyk&show_icons=true&theme=default&hide_border=true&title_color=a855f7&text_color=475569&icon_color=a855f7&cache_seconds=1800" 
-                alt="GitHub Stats" 
-                className="w-full h-auto"
-                onError={() => setStatsError(true)}
-              />
-            ) : (
-              <div className="text-center p-4">
-                <p className="text-xs text-slate-400 mb-2">활동 통계를 불러올 수 없습니다.</p>
-                <a href="https://github.com/vednuyk" target="_blank" rel="noopener noreferrer" className="text-[10px] text-purple-500 font-bold hover:underline">GitHub에서 보기</a>
+          <div className="grid grid-cols-2 gap-y-4 gap-x-2">
+            {githubStats.languages.map((lang, idx) => (
+              <div key={idx} className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: lang.color }} />
+                <span className="text-xs font-bold text-slate-700">{lang.name}</span>
+                <span className="text-[10px] text-slate-400 font-medium">{lang.percent}%</span>
               </div>
-            )}
+            ))}
           </div>
+        </div>
+      </section>
+
+      <section>
+        <h3 className="text-sm font-bold text-slate-900 mb-6 uppercase tracking-wider flex items-center gap-2">
+          <div className="w-1 h-4 bg-purple-500 rounded-full" /> GitHub Stats
+        </h3>
+        <div className="grid grid-cols-1 gap-4">
+          {[
+            { label: 'Total Stars', value: githubStats.stars, icon: Star, color: 'text-yellow-500' },
+            { label: 'Public Repos', value: githubStats.repos, icon: Book, color: 'text-blue-500' },
+            { label: 'Followers', value: githubStats.followers, icon: Users, color: 'text-purple-500' }
+          ].map((stat, idx) => (
+            <div key={idx} className="bg-white rounded-2xl border border-slate-100 p-5 shadow-sm flex items-center justify-between hover:border-purple-200 transition-colors group">
+              <div className="flex items-center gap-4">
+                <div className={`p-2.5 rounded-xl bg-slate-50 group-hover:bg-white transition-colors`}>
+                  <stat.icon className={`w-5 h-5 ${stat.color}`} />
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{stat.label}</p>
+                  <p className="text-lg font-bold text-slate-900 leading-none mt-1">{stat.value}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
