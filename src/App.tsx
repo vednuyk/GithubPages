@@ -7,7 +7,6 @@ import {
   Globe, 
   Mail, 
   ExternalLink,
-  ChevronRight,
   Menu
 } from 'lucide-react';
 
