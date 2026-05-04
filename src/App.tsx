@@ -226,7 +226,7 @@ const IntroduceSection = ({ setActiveTab }: { setActiveTab: (tab: Tab) => void }
     >
       <div className="flex flex-col xl:flex-row gap-12 xl:gap-32 items-start justify-between">
         {/* Main Content Area */}
-        <div className="flex-1 w-full max-w-3xl xl:pl-20">
+        <div className="flex-1 w-full max-w-4xl xl:pl-20">
           <header className="mb-20">
             <div className="flex items-center gap-2 text-slate-400 mb-6 text-xs uppercase tracking-widest font-bold">
               <div className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.5)]" /> Introduce
@@ -243,7 +243,6 @@ const IntroduceSection = ({ setActiveTab }: { setActiveTab: (tab: Tab) => void }
           <section>
             <div className="flex items-center gap-4 mb-12">
               <h2 className="text-2xl font-bold text-slate-900">My Journey</h2>
-              <ChevronRight className="text-slate-300 w-5 h-5" />
             </div>
 
             <div className="relative max-w-4xl">
