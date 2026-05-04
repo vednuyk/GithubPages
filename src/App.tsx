@@ -7,7 +7,9 @@ import {
   Globe, 
   Mail, 
   ExternalLink,
-  Menu
+  Menu,
+  MessageSquare,
+  Heart
 } from 'lucide-react';
 
 // --- Types ---
@@ -21,6 +23,16 @@ interface TimelineItem {
   image?: string;
   link?: string;
   side: 'left' | 'right';
+}
+
+interface Post {
+  id: number;
+  title: string;
+  excerpt: string;
+  date: string;
+  tags: string[];
+  comments: number;
+  likes: number;
 }
 
 // --- Data ---
@@ -49,6 +61,36 @@ const timelineData: TimelineItem[] = [
     description: "다양한 전공의 학생들과 협업하며 실제 서비스의 기획부터 배포까지 경험했습니다.",
     image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=400&auto=format&fit=crop",
     side: 'left'
+  }
+];
+
+const postData: Post[] = [
+  {
+    id: 1,
+    title: "SUNO AI",
+    excerpt: "Suno AI를 통해 뮤직 메이킹에 10달러 혹은 년 8달러달에 10달러로 해보기 https://suno.com/",
+    date: "2025년 12월 16일",
+    tags: ["Unity", "인디게임꿀팁사이트"],
+    comments: 0,
+    likes: 0
+  },
+  {
+    id: 2,
+    title: "Scriptable Object도 추상화가 된다 [ 아이템 ]",
+    excerpt: "결론부터 말씀드리면, ScriptableObject에도 함수 코드를 짤 수 있습니다! 많은 분들이 오해하시는 부분인데, ScriptableObject는 단순히 데이터(이름, 공격력, 아이콘)만 담는 통이 아닙니다. 상속(Inheritance)과 가상 함수(Virtual ...",
+    date: "2025년 12월 11일",
+    tags: ["Gemini", "Unity"],
+    comments: 0,
+    likes: 0
+  },
+  {
+    id: 3,
+    title: "Event Handler 사용법",
+    excerpt: "C.NET(C장점: 성능이 가장 좋습니다. 코드상에서 구독(+=)과 해지(-=)가 명확하여 프로그래머가 로직 흐름을 파악하기 좋습니다.",
+    date: "2025년 12월 11일",
+    tags: ["C#", "Unity"],
+    comments: 0,
+    likes: 0
   }
 ];
 
@@ -265,6 +307,90 @@ const IntroduceSection = ({ setActiveTab }: { setActiveTab: (tab: Tab) => void }
   );
 };
 
+const PostSection = () => {
+  const tags = [
+    { name: '전체보기', count: 51 },
+    { name: 'Unity', count: 30 },
+    { name: '알고리즘', count: 13 },
+    { name: 'optimization', count: 5 },
+    { name: 'FSM', count: 3 },
+    { name: '데이터베이스', count: 3 },
+    { name: '잡담', count: 3 },
+    { name: 'C#', count: 2 },
+    { name: 'MyTipCode', count: 2 },
+    { name: 'Gemini', count: 2 },
+    { name: '인디게임꿀팁사이트', count: 1 },
+    { name: 'VR', count: 1 }
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="w-full py-12 px-6 lg:px-12 xl:px-16 mx-auto max-w-[90rem]"
+    >
+      <div className="flex flex-col xl:flex-row gap-12 items-start">
+        {/* Main Post Feed */}
+        <div className="flex-1 w-full space-y-16">
+          {postData.map((post) => (
+            <article key={post.id} className="group cursor-pointer">
+              <h2 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-purple-600 transition-colors">
+                {post.title}
+              </h2>
+              <p className="text-slate-600 leading-relaxed mb-6 line-clamp-3 font-light">
+                {post.excerpt}
+              </p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {post.tags.map((tag) => (
+                  <span 
+                    key={tag} 
+                    className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium hover:bg-purple-100 hover:text-purple-600 transition-colors"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className="flex items-center gap-4 text-xs text-slate-400 font-medium">
+                <span>{post.date}</span>
+                <span>·</span>
+                <div className="flex items-center gap-1">
+                  <MessageSquare className="w-3.5 h-3.5" />
+                  {post.comments}개의 댓글
+                </div>
+                <span>·</span>
+                <div className="flex items-center gap-1">
+                  <Heart className="w-3.5 h-3.5" />
+                  {post.likes}
+                </div>
+              </div>
+              <div className="mt-12 h-px bg-slate-100 w-full" />
+            </article>
+          ))}
+        </div>
+
+        {/* Tags Sidebar */}
+        <aside className="w-full xl:w-64 flex-shrink-0 xl:sticky xl:top-8">
+          <h3 className="text-sm font-bold text-slate-900 mb-6 pb-2 border-b border-slate-200 uppercase tracking-wider">
+            태그 목록
+          </h3>
+          <ul className="space-y-3">
+            {tags.map((tag) => (
+              <li key={tag.name} className="flex items-center justify-between group cursor-pointer">
+                <span className={`text-sm transition-colors ${tag.name === '전체보기' ? 'text-purple-600 font-bold' : 'text-slate-500 group-hover:text-purple-600'}`}>
+                  {tag.name}
+                </span>
+                <span className="text-xs text-slate-300 group-hover:text-purple-400">
+                  ({tag.count})
+                </span>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      </div>
+    </motion.div>
+  );
+};
+
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<Tab>('Introduce');
 
@@ -298,15 +424,7 @@ const App: React.FC = () => {
               </motion.div>
             )}
             {activeTab === 'Post' && (
-              <motion.div 
-                key="post"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="flex-1 p-16 text-slate-400 italic"
-              >
-                Post content coming soon...
-              </motion.div>
+              <PostSection key="post" />
             )}
           </AnimatePresence>
         </motion.div>
