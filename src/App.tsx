@@ -103,13 +103,12 @@ const Sidebar = ({ activeTab, setActiveTab }: { activeTab: Tab, setActiveTab: (t
 );
 
 const TimelineItemComponent = ({ item, onImageClick }: { item: TimelineItem, onImageClick: (item: TimelineItem) => void }) => (
-  <motion.div 
+  <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
-    className={`relative mb-10 flex w-full ${item.side === 'right' ? 'justify-end pl-24' : 'justify-start'}`}
-  >
-    <div className={`max-w-sm w-full flex flex-col ${item.side === 'right' ? 'items-end text-right' : 'items-start text-left'}`}>
+    className={`relative mb-10 flex w-full ${item.side === 'right' ? 'justify-end pl-32' : 'justify-start pr-8'}`}
+  >    <div className={`max-w-sm w-full flex flex-col ${item.side === 'right' ? 'items-end text-right' : 'items-start text-left'}`}>
       <div className="relative mb-2">
         <h3 className="text-lg font-bold text-slate-900 px-1 leading-tight">{item.title}</h3>
         <div className={`mt-1.5 h-0.5 bg-slate-300 relative w-full`}>
